@@ -1,6 +1,23 @@
 # 3dAngApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+# Angular Three.js Cube Viewer
+
+This Angular application integrates Three.js to create a dynamic 3D cube that can be controlled through various user inputs. Users can interactively adjust the camera position, change the rotation speed of the cube, and upload custom textures to apply to the cube's surface.
+
+## Features
+
+- **3D Cube Rendering**: The app uses Three.js to render a 3D cube within the Angular framework.
+- **Dynamic Camera Positioning**: Users can change the camera's Z position to zoom in or out on the cube.
+- **Adjustable Rotation Speeds**: Users can control the rotation speed of the cube along the X and Y axes.
+- **Custom Texture Upload**: Users can upload an image file to use as the texture on the cube.
+
+## Technologies Used
+
+- **Angular**: Front-end framework used for building the application.
+- **Three.js**: JavaScript 3D library used to create and render the 3D cube.
+- **TypeScript**: Superset of JavaScript used for type-safe coding.
+
 
 ## Development server
 
