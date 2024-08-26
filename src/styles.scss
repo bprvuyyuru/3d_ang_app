@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Full height of the viewport */
+  width: 100vw; /* Full width of the viewport */
+  margin: 0; /* Remove any default margin */
+  padding: 0;
+}
+
+.container > div {
+  flex: 1; /* Each child div takes up equal space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > div:first-child {
+  background-color: #f0f0f0; /* Optional: Add a background color for differentiation */
+}

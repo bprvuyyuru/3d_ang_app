@@ -1,0 +1,16 @@
+.inputFeilds {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputFeilds > div,
+h1 {
+  flex: 0.01; /* Each child div takes up equal space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputFeilds > h1 {
+  font-size: x-large;
+}
