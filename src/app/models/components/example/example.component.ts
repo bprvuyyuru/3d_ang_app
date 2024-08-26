@@ -4,6 +4,7 @@ import {
   ElementRef,
   Input,
   OnInit,
+  SimpleChanges,
   ViewChild,
 } from "@angular/core";
 import * as THREE from "three";
@@ -26,15 +27,16 @@ export class ExampleComponent implements OnInit, AfterViewInit {
 
   //* Stage Properties
   @Input() public cameraZ: number = 400;
-  @Input() public fieldOfView: number = 1;
+  @Input() public fieldOfView: number = 4;
   @Input("nearClipping") public nearClippingPlane: number = 1;
-  @Input("farClipping") public farClippingPlane: number = 1000;
+  @Input("farClipping") public farClippingPlane: number = 500;
 
   //? Helper Properties (Private Properties)
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
   private scene!: THREE.Scene;
   private cube!: THREE.Mesh;
+  private cube2!: THREE.Mesh;
 
   private get canvas(): HTMLCanvasElement {
     return this.canvasRef.nativeElement;
@@ -49,6 +51,37 @@ export class ExampleComponent implements OnInit, AfterViewInit {
     this.startRenderingLoop();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["cameraZ"] && !changes["cameraZ"].isFirstChange()) {
+      // Update the camera's z position dynamically when cameraZ changes
+      this.camera.position.z = this.cameraZ;
+    }
+    if (
+      changes["rotationSpeedX"] &&
+      !changes["rotationSpeedX"].isFirstChange()
+    ) {
+      // Update the speed dynamically when speedx changes
+      this.cube.rotation.x += this.rotationSpeedX;
+    }
+    if (
+      changes["rotationSpeedY"] &&
+      !changes["rotationSpeedY"].isFirstChange()
+    ) {
+      // Update the speed dynamically when speedx changes
+      this.cube.rotation.y += this.rotationSpeedY;
+    }
+    if (changes["texture"] && !changes["texture"].isFirstChange()) {
+      this.updateTexture(this.texture);
+    }
+  }
+
+  private updateTexture(texture: string) {
+    const loader = new THREE.TextureLoader();
+    loader.load(texture, (newTexture) => {
+      (this.cube.material as THREE.MeshBasicMaterial).map = newTexture;
+    });
+  }
+
   /**
    * Initialize the scene, camera, and cube
    */
@@ -56,7 +89,8 @@ export class ExampleComponent implements OnInit, AfterViewInit {
     // Load texture and create the material
     const loader = new THREE.TextureLoader();
     loader.load(this.texture, (texture) => {
-      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const geometry = new THREE.BoxGeometry(2, 2, 2);
+      const geometry1 = new THREE.BoxGeometry(1, 1, 1);
       const material = new THREE.MeshBasicMaterial({ map: texture });
       this.cube = new THREE.Mesh(geometry, material);
 
@@ -70,7 +104,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   private createScene() {
     //* Scene
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
+    this.scene.background = new THREE.Color(0xffffff);
     this.scene.add(this.cube);
 
     //* Camera

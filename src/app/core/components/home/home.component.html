@@ -1,1 +1,44 @@
-<p>home works!</p>
+<div class="container">
+  <div class="inputFeilds">
+    <h1>This is a 3d cube built using three js and angular</h1>
+    <div>
+      <p>Change the camera z view</p>
+      <input
+        type="number"
+        [(ngModel)]="cameraZ"
+        placeholder="Enter number"
+        step="10"
+      />
+    </div>
+    <div>
+      <p>Change the rotation speed X (between 0 to 1)</p>
+      <input
+        type="number"
+        [(ngModel)]="rotationSpeedX"
+        placeholder="Enter number"
+        step="0.01"
+      />
+    </div>
+    <div>
+      <p>Change the rotation speed Y (between 0 to 1)</p>
+      <input
+        type="number"
+        [(ngModel)]="rotationSpeedY"
+        placeholder="Enter number"
+        step="0.01"
+      />
+    </div>
+    <div>
+      <p>Upload a texture image</p>
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+  </div>
+  <div>
+    <app-example
+      [cameraZ]="cameraZ"
+      [rotationSpeedX]="rotationSpeedX"
+      [rotationSpeedY]="rotationSpeedY"
+      [texture]="texture"
+    ></app-example>
+  </div>
+</div>
